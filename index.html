@@ -38,6 +38,15 @@
             animation: heartbeat 1s infinite;
         }
 
+        /* Center images */
+        img {
+            display: block;
+            margin: 20px auto;
+        }
+        
+        #question-container, #birthday-message, #welcome {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -61,7 +70,7 @@
 
         <div id="question-container">
             <p id="question">Do you remember the first time we met? ❤️</p>
-            <img id="memory-image" src="" alt="Memory Image" style="width: 200px; display: none;">
+            <img id="memory-image" src="" alt="Memory Image" width="200" style="display: none;">
             <br>
             <button onclick="checkAnswer('yes')">Yes</button>
             <button onclick="checkAnswer('no')">No</button>
