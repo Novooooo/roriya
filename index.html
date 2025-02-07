@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday, My Love!</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #f79797;
+            overflow: hidden;
+        }
+        #welcome, #quiz, #birthday-message {
+            display: none;
+        }
+        button {
+            padding: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #ff6699;
+            color: white;
+            border: none;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        .hidden { display: none; }
+        
+        /* Heart Animation */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .heart {
+            font-size: 50px;
+            color: red;
+            animation: heartbeat 1s infinite;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Background Music -->
+    <audio id="bg-music" autoplay loop>
+        <source src="Perfect.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Welcome Page -->
+    <div id="welcome">
+        <h1>Happy Birthday, My Love! 🎉</h1>
+        <img src="memories/birthday_Girl.jpg" alt="Birthday Image" width="300">
+        <p>Let's play a fun game before your final birthday surprise!</p>
+        <button onclick="startQuiz()">Start</button>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quiz">
+        <h2>Answer these Yes/No questions to unlock your surprise, (Don't say no though)!</h2>
+
+        <div id="question-container">
+            <p id="question">Do you remember the first time we met? ❤️</p>
+            <img id="memory-image" src="" alt="Memory Image" style="width: 200px; display: none;">
+            <br>
+            <button onclick="checkAnswer('yes')">Yes</button>
+            <button onclick="checkAnswer('no')">No</button>
+        </div>
+
+        <p id="result"></p>
+    </div>
+
+    <!-- Final Birthday Message -->
+    <div id="birthday-message">
+        <h1 class="heart">🎉 Happy Birthday, My Love! 🎂</h1>
+        <p>You are the best thing happened in my life! I wish to grow old with you. I will always take 
+            care of you. I hope this day brings you all the happiness in the world, showering you with 
+            lots of love & kisses, I love you so much! 💖</p>
+        <img src="memories/Final.jpg" alt="Love Image" width="300">
+    </div>
+
+    <script>
+        // Background music auto-play fix
+        document.addEventListener("click", function() {
+            document.getElementById("bg-music").play();
+        });
+
+        // List of Yes/No questions with memory images
+        const questions = [
+            { question: "Do you remember the first time we met? ❤️", correct: "yes", image: "memories/photo_1.jpeg" },
+            { question: "Do you want to grow old with me? 😘", correct: "yes", image: "memories/photo_2.jpg"},
+            { question: "Will you always stay with me? 💕", correct: "yes", image: "memories/photo_3.jpg" },
+            { question: "Do you agree we're a match made in heaven? 💕", correct: "yes", image: "memories/photo_4.jpg"},
+            { question: "Finally, Do you love me?", correct: "yes", image: "memories/photo_5.jpg"}
+        ];
+
+        let currentQuestion = 0;
+
+        function startQuiz() {
+            document.getElementById("welcome").style.display = "none";
+            document.getElementById("quiz").style.display = "block";
+            document.getElementById("memory-image").src = questions[0].image;
+            document.getElementById("memory-image").style.display = "block";
+        }
+
+        function checkAnswer(answer) {
+            if (answer.toLowerCase() === questions[currentQuestion].correct) {
+                currentQuestion++;
+                if (currentQuestion < questions.length) {
+                    document.getElementById("question").innerText = questions[currentQuestion].question;
+                    document.getElementById("memory-image").src = questions[currentQuestion].image;
+                } else {
+                    document.getElementById("quiz").style.display = "none";
+                    document.getElementById("birthday-message").style.display = "block";
+                }
+            } else {
+                document.getElementById("result").innerText = "Oops! Try again!";
+            }
+        }
+
+        // Show the welcome page on load
+        document.getElementById("welcome").style.display = "block";
+    </script>
+
+</body>
+</html>
